@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrithviMitra AI (पृथ्वीमित्र) - India's Behavioral Climate Companion</title>
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="PrithviMitra AI is India's personal climate companion, turning small actions into a national green movement. Track carbon footprints via UPI, AC temp, LPG, and Metro logs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+  
+  <!-- App Layout -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="leaf-svg">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 8a7 7 0 0 1-9 10z"></path>
+            <path d="M9 22v-4"></path>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>पृथ्वीमित्र AI</h1>
+          <span>PRITHVIMITRA</span>
+        </div>
+      </div>
+      
+      <div class="hook-box text-center">
+        <p class="hook-text">"Small Actions. Lasting Impact. A Greener Bharat, One Citizen at a Time."</p>
+      </div>
+      
+      <nav class="nav-links">
+        <button class="nav-btn active" data-tab="dashboard" id="tab-dashboard-btn">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+          Mitra Dashboard
+        </button>
+        <button class="nav-btn" data-tab="recommendations" id="tab-recommendations-btn">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12M6 9h12M6 4a5 5 0 0 1 0 10H6m5 0l6 6"></path></svg>
+          AI Action Engine
+        </button>
+        <button class="nav-btn" data-tab="simulator" id="tab-simulator-btn">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+          Bhavishya Engine
+        </button>
+        <button class="nav-btn" data-tab="agents" id="tab-agents-btn">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+          Agent Console
+          <span class="pulse-dot"></span>
+        </button>
+        <button class="nav-btn" data-tab="community" id="tab-community-btn">
+          <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Bharat Movement
+        </button>
+      </nav>
+      
+      <!-- Smart Data Integrations Widget -->
+      <div class="sidebar-widget integration-widget">
+        <div class="widget-header">
+          <span>Smart Integrations</span>
+          <span class="sync-status">Active</span>
+        </div>
+        <div class="integration-list">
+          <div class="int-item"><span class="bullet-green"></span> UPI Spending Feed</div>
+          <div class="int-item"><span class="bullet-green"></span> Fastag / Metro Card</div>
+          <div class="int-item"><span class="bullet-green"></span> LPG Cylinders Log</div>
+          <div class="int-item"><span class="bullet-green"></span> Electricity Smart Meter</div>
+        </div>
+      </div>
+      
+      <!-- Twin Quick Status Widget -->
+      <div class="sidebar-widget">
+        <div class="widget-header">
+          <span>Mitra State</span>
+          <span id="sidebar-twin-label" class="status-badge state-good">Optimal</span>
+        </div>
+        <div class="twin-mini-aura" id="sidebar-aura-glow"></div>
+        <div class="widget-stats">
+          <div class="stat-row">
+            <span class="stat-label">Daily Footprint</span>
+            <span class="stat-val" id="sidebar-carbon-score">76.4 kg</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bharat Percentile</span>
+            <span class="stat-val" id="sidebar-percentile">91%</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Header / Control bar -->
+      <header class="app-header">
+        <div class="welcome-msg">
+          <h2 id="header-greeting">Namaste, Prithvi Mitra</h2>
+          <p id="header-subtitle">Your climate digital twin is fully synced with UPI and fastag datasets.</p>
+        </div>
+        
+        <div class="header-actions">
+          <div class="citizen-rank-badge">
+            <span class="rank-lbl">Mission Level:</span>
+            <span id="citizen-rank-text" class="rank-badge bronze">Bronze Citizen</span>
+          </div>
+          
+          <div class="eco-streak">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" class="streak-icon">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+            </svg>
+            <span id="streak-counter">14 Day Streak</span>
+          </div>
+          
+          <div class="points-badge">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" class="points-icon">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 8v8M8 12h8"></path>
+            </svg>
+            <span id="points-counter">3,450 XP</span>
+          </div>
+          
+          <button id="theme-toggle" class="icon-btn" title="Toggle Light/Dark Mode">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" class="sun-icon"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
+          </button>
+        </div>
+      </header>
+      
+      <!-- Panel 1: Dashboard / Twin -->
+      <section class="tab-panel active" id="panel-dashboard">
+        
+        <!-- PrithviMitra AI Coach Banner -->
+        <div class="card glass-card coach-banner-card">
+          <div class="coach-avatar-header">
+            <div class="coach-avatar-img">
+              <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none">
+                <circle cx="12" cy="8" r="5"></circle>
+                <path d="M3 21v-2a7 7 0 0 1 14 0v2"></path>
+              </svg>
+            </div>
+            <div>
+              <h3>PrithviMitra AI Coach</h3>
+              <p class="subtitle">Personalized morning climate companion insight</p>
+            </div>
+            <div class="coach-score-box">
+              <span class="score-lbl">Mitra Score</span>
+              <span id="coach-green-score" class="score-val text-green">72/100</span>
+            </div>
+          </div>
+          
+          <div class="coach-grid">
+            <div class="coach-item-detail">
+              <span class="coach-lbl-tag">Daily Climate Insight</span>
+              <p id="coach-insight-text">"Using the metro twice this week saved enough carbon to power a home LED bulb for 3 months."</p>
+            </div>
+            <div class="coach-item-detail">
+              <span class="coach-lbl-tag">Coach Recommendation</span>
+              <p id="coach-rec-text">"Switch one meal this week to a plant-based alternative and save 3 kg CO₂."</p>
+            </div>
+            <div class="coach-item-detail">
+              <span class="coach-lbl-tag">Weekly Challenge</span>
+              <p id="coach-challenge-text">"Complete 5 car-free trips using Metros, local transit, or electric scooters."</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid-2col">
+          
+          <!-- Column 1: Twin Interactive Avatar -->
+          <div class="card glass-card twin-card">
+            <div class="card-header">
+              <h3>Carbon Twin Representation</h3>
+              <span class="info-pill">Live Sync (IN)</span>
+            </div>
+            
+            <div class="avatar-container">
+              <svg id="twin-avatar-svg" viewBox="0 0 200 200" width="150" height="150">
+                <defs>
+                  <filter id="glow-good" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="15" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                  <radialGradient id="grad-good" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.8" />
+                    <stop offset="70%" stop-color="#4facfe" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="#4facfe" stop-opacity="0" />
+                  </radialGradient>
+                  <radialGradient id="grad-avg" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#f5d020" stop-opacity="0.8" />
+                    <stop offset="70%" stop-color="#f53803" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="#f53803" stop-opacity="0" />
+                  </radialGradient>
+                  <radialGradient id="grad-bad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ff0844" stop-opacity="0.8" />
+                    <stop offset="70%" stop-color="#ffb199" stop-opacity="0.3" />
+                    <stop offset="100%" stop-color="#ffb199" stop-opacity="0" />
+                  </radialGradient>
+                </defs>
+                <circle id="twin-aura" cx="100" cy="100" r="75" fill="url(#grad-good)" filter="url(#glow-good)" class="pulse-animation" />
+                <circle id="twin-core" cx="100" cy="100" r="30" fill="#ffffff" opacity="0.9" />
+                <circle cx="100" cy="40" r="6" fill="#10b981" class="orbit-node-1" />
+                <circle cx="160" cy="100" r="6" fill="#06b6d4" class="orbit-node-2" />
+                <circle cx="100" cy="160" r="6" fill="#6366f1" class="orbit-node-3" />
+                <circle cx="40" cy="100" r="6" fill="#f59e0b" class="orbit-node-4" />
+              </svg>
+              
+              <div class="avatar-labels text-center">
+                <h4 id="twin-status-title">Aura: Emerald Shanti</h4>
+                <p id="twin-status-desc">Your profile shows high metro coordination and low AC utility leakage.</p>
+              </div>
+            </div>
+            
+            <div class="twin-controls">
+              <span class="section-subtitle">Simulate Lifestyle Inputs</span>
+              
+              <div class="control-group">
+                <label for="slide-commute">Weekly Commute (Car Kilometers)</label>
+                <div class="slider-val-container">
+                  <input type="range" id="slide-commute" min="0" max="400" value="80">
+                  <span class="range-val" id="val-commute">80 km</span>
+                </div>
+              </div>
+              
+              <div class="control-group">
+                <label for="slide-meat">Meat &amp; Dairy Meals (per week)</label>
+                <div class="slider-val-container">
+                  <input type="range" id="slide-meat" min="0" max="21" value="4">
+                  <span class="range-val" id="val-meat">4 meals</span>
+                </div>
+              </div>
+              
+              <div class="control-group">
+                <label for="slide-thermostat">Air Conditioner Temperature (&deg;C)</label>
+                <div class="slider-val-container">
+                  <input type="range" id="slide-thermostat" min="18" max="30" value="22">
+                  <span class="range-val" id="val-thermostat">22 &deg;C</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Column 2: Carbon Intelligence KPIs & Today's Actions -->
+          <div class="card glass-card kpi-card-container">
+            <div class="card-header">
+              <h3>Carbon Intelligence Center</h3>
+              <div class="dropdown-mock">
+                <span>Monthly View</span>
+              </div>
+            </div>
+            
+            <div class="kpi-grid">
+              <div class="kpi-item">
+                <div class="kpi-icon icon-transport">
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-1.1 0-2 .9-2 2v7h2"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>
+                </div>
+                <div class="kpi-data">
+                  <span class="kpi-label">Transport</span>
+                  <h4 class="kpi-val" id="kpi-val-transport">22.4 kg</h4>
+                  <span class="kpi-trend trend-good">-12% vs last month</span>
+                </div>
+              </div>
+              
+              <div class="kpi-item">
+                <div class="kpi-icon icon-food">
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <div class="kpi-data">
+                  <span class="kpi-label">Food Consumption</span>
+                  <h4 class="kpi-val" id="kpi-val-food">8.4 kg</h4>
+                  <span class="kpi-trend trend-good">-4% vs last month</span>
+                </div>
+              </div>
+              
+              <div class="kpi-item">
+                <div class="kpi-icon icon-utilities">
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                </div>
+                <div class="kpi-data">
+                  <span class="kpi-label">Electricity &amp; LPG</span>
+                  <h4 class="kpi-val" id="kpi-val-utilities">32.8 kg</h4>
+                  <span class="kpi-trend trend-neutral">Flat vs last month</span>
+                </div>
+              </div>
+              
+              <div class="kpi-item">
+                <div class="kpi-icon icon-digital">
+                  <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                </div>
+                <div class="kpi-data">
+                  <span class="kpi-label">Digital Usage</span>
+                  <h4 class="kpi-val" id="kpi-val-digital">11.2 kg</h4>
+                  <span class="kpi-trend trend-bad">+18% vs last month</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Today's Green Actions checklist -->
+            <div class="todays-actions-box">
+              <span class="section-subtitle">Today's Green Actions</span>
+              <div class="daily-check-list">
+                <label class="check-item-container">
+                  <input type="checkbox" id="check-action-metro" data-carbon="2.4" data-money="120">
+                  <span class="checkmark"></span>
+                  <span class="action-desc-text">Use public transport/Metro today <span class="action-highlight">(-2.4 kg | -&#8377;120)</span></span>
+                </label>
+                <label class="check-item-container">
+                  <input type="checkbox" id="check-action-bottle" data-carbon="0.3" data-water="10">
+                  <span class="checkmark"></span>
+                  <span class="action-desc-text">Carry reusable copper bottle <span class="action-highlight">(-0.3 kg | +10L water)</span></span>
+                </label>
+                <label class="check-item-container">
+                  <input type="checkbox" id="check-action-ac" data-carbon="1.1" data-money="90">
+                  <span class="checkmark"></span>
+                  <span class="action-desc-text">Raise AC thermostat temp by 1\u00B0C <span class="action-highlight">(-1.1 kg | -&#8377;90)</span></span>
+                </label>
+                <label class="check-item-container">
+                  <input type="checkbox" id="check-action-walk" data-carbon="0.8" data-money="30">
+                  <span class="checkmark"></span>
+                  <span class="action-desc-text">Walk for trips under 1 km <span class="action-highlight">(-0.8 kg | -&#8377;30)</span></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="card-footer-stats">
+              <div class="summary-stat-box">
+                <span class="box-lbl">Est. Monthly Cost</span>
+                <span class="box-val" id="total-financial-cost">&#8377;12,450</span>
+              </div>
+              <div class="summary-stat-box">
+                <span class="box-lbl">Sustain. Rank</span>
+                <span id="sustainability-rank-compare" class="box-val text-green">Top 12%</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- Panel 2: Recommendations -->
+      <section class="tab-panel" id="panel-recommendations">
+        <div class="card glass-card">
+          <div class="card-header">
+            <div>
+              <h3>AI Action Recommendation Matrix</h3>
+              <p class="subtitle">Indian citizen decarbonization recommendations ranked by dynamic ROI.</p>
+            </div>
+            <div class="action-filters">
+              <span class="filter-tag active">Highest ROI</span>
+              <span class="filter-tag">Lowest Effort</span>
+              <span class="filter-tag">High CAPEX</span>
+            </div>
+          </div>
+          
+          <div class="recommendations-list" id="rec-list-container">
+            <!-- Populated via JavaScript dynamically -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- Panel 3: Simulator -->
+      <section class="tab-panel" id="panel-simulator">
+        <div class="grid-2col">
+          
+          <!-- Controls -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <h3>Bhavishya (Future Impact Engine)</h3>
+              <p class="subtitle">Model your 1-year, 5-year, and 10-year cumulative trajectories in India.</p>
+            </div>
+            
+            <div class="simulation-sliders">
+              <div class="scenario-selector">
+                <span class="section-subtitle">Select Decarbonization Scenario</span>
+                <div class="scenario-btn-group">
+                  <button class="scen-btn" data-scenario="status-quo" id="btn-status-quo">Status Quo</button>
+                  <button class="scen-btn active" data-scenario="moderate" id="btn-moderate">Moderate Action</button>
+                  <button class="scen-btn" data-scenario="aggressive" id="btn-aggressive">Aggressive Action</button>
+                </div>
+              </div>
+              
+              <div class="custom-projection-parameters">
+                <span class="section-subtitle">Adjust Forecast Tuning</span>
+                
+                <div class="control-group">
+                  <label for="slide-solar-adoption">Solar Rooftop (PM Surya Ghar Share)</label>
+                  <div class="slider-val-container">
+                    <input type="range" id="slide-solar-adoption" min="0" max="100" value="40">
+                    <span class="range-val" id="val-solar-adoption">40%</span>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <label for="slide-transit-share">Metro / Local Train Commute Share</label>
+                  <div class="slider-val-container">
+                    <input type="range" id="slide-transit-share" min="0" max="100" value="30">
+                    <span class="range-val" id="val-transit-share">30%</span>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <label for="slide-plant-diet">Millet &amp; Plant Diet Share</label>
+                  <div class="slider-val-container">
+                    <input type="range" id="slide-plant-diet" min="0" max="100" value="50">
+                    <span class="range-val" id="val-plant-diet">50%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Graph / Simulation Outputs -->
+          <div class="card glass-card output-visualization-card">
+            <div class="card-header">
+              <h3>Projected Environmental Returns</h3>
+              <span id="forecast-scenario-indicator" class="status-badge state-avg">Moderate Target</span>
+            </div>
+            
+            <div class="projection-chart-container">
+              <!-- Custom Interactive CSS-based visual chart columns -->
+              <div class="mock-chart">
+                <div class="chart-y-axis">
+                  <span>100%</span>
+                  <span>75%</span>
+                  <span>50%</span>
+                  <span>25%</span>
+                  <span>0%</span>
+                </div>
+                <div class="chart-columns">
+                  <div class="chart-col">
+                    <div class="bar bar-baseline" id="bar-1y-base" style="height: 95%;"></div>
+                    <div class="bar bar-projected" id="bar-1y-proj" style="height: 75%;"></div>
+                    <span class="col-label">1-Year</span>
+                  </div>
+                  <div class="chart-col">
+                    <div class="bar bar-baseline" id="bar-5y-base" style="height: 95%;"></div>
+                    <div class="bar bar-projected" id="bar-5y-proj" style="height: 48%;"></div>
+                    <span class="col-label">5-Year</span>
+                  </div>
+                  <div class="chart-col">
+                    <div class="bar bar-baseline" id="bar-10y-base" style="height: 95%;"></div>
+                    <div class="bar bar-projected" id="bar-10y-proj" style="height: 25%;"></div>
+                    <span class="col-label">10-Year</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="chart-legend">
+                <div class="legend-item"><span class="legend-color base-color"></span> Baseline Footprint</div>
+                <div class="legend-item"><span class="legend-color proj-color"></span> Projected Footprint</div>
+              </div>
+            </div>
+            
+            <div class="simulation-outputs-grid grid-4col">
+              <div class="sim-stat">
+                <span class="sim-lbl">Carbon Saved</span>
+                <h4 class="sim-val text-cyan" id="sim-val-carbon">4,820 kg</h4>
+              </div>
+              <div class="sim-stat">
+                <span class="sim-lbl">Tree Equivalent</span>
+                <h4 class="sim-val text-green" id="sim-val-trees">219 Trees</h4>
+              </div>
+              <div class="sim-stat">
+                <span class="sim-lbl">Water Saved</span>
+                <h4 class="sim-val text-blue" id="sim-val-water">42,500 L</h4>
+              </div>
+              <div class="sim-stat">
+                <span class="sim-lbl">Money Saved</span>
+                <h4 class="sim-val text-yellow" id="sim-val-money">&#8377;98,400</h4>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- Panel 4: Multi-Agent Console -->
+      <section class="tab-panel" id="panel-agents">
+        <div class="card glass-card console-card">
+          <div class="card-header">
+            <div>
+              <h3>Multi-Agent Orchestration Log</h3>
+              <p class="subtitle">Monitor real-time communication between the system's AI nodes.</p>
+            </div>
+            <div class="console-controls">
+              <span class="status-indicator live">LIVE SYNC</span>
+              <button class="clean-btn" id="btn-clear-console">Clear Log</button>
+            </div>
+          </div>
+          
+          <div class="agent-console-feed" id="agent-console-log">
+            <!-- Simulated Logs feed added here -->
+          </div>
+          
+          <div class="console-input-area">
+            <input type="text" id="console-query-input" placeholder="Ask PrithviMitra Agents (e.g. 'How can I save money on utility bills using solar rooftops?')...">
+            <button id="console-send-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Panel 5: Community Hub -->
+      <section class="tab-panel" id="panel-community">
+        
+        <!-- Climate Missions Dashboard Widget -->
+        <div class="card glass-card missions-card">
+          <div class="card-header">
+            <div>
+              <h3>Climate Missions &amp; Citizenship Progress</h3>
+              <p class="subtitle">Complete sustainable actions to earn Carbon Certificates and elevate your Green Rank.</p>
+            </div>
+            <div class="mission-total-badge">
+              <span id="mission-total-saved">Monthly Reduction: 12.4 kg CO₂</span>
+            </div>
+          </div>
+          
+          <div class="missions-levels-grid">
+            <div class="mission-level-box active" id="level-bronze">
+              <div class="level-badge bronze">Bronze Citizen</div>
+              <span class="level-limit">Target: 5 kg/mo</span>
+              <span class="level-status">Achieved!</span>
+            </div>
+            <div class="mission-level-box" id="level-silver">
+              <div class="level-badge silver">Silver Citizen</div>
+              <span class="level-limit">Target: 20 kg/mo</span>
+              <span class="level-status">Locked</span>
+            </div>
+            <div class="mission-level-box" id="level-gold">
+              <div class="level-badge gold">Gold Citizen</div>
+              <span class="level-limit">Target: 50 kg/mo</span>
+              <span class="level-status">Locked</span>
+            </div>
+            <div class="mission-level-box" id="level-champion">
+              <div class="level-badge champion">Climate Champion</div>
+              <span class="level-limit">Target: 100 kg/mo</span>
+              <span class="level-status">Locked</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid-2col">
+          
+          <!-- Column 1: Active Challenges & Leaderboard -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <h3>Community Challenges</h3>
+              <p class="subtitle">Join neighborhood challenges and save carbon collectively.</p>
+            </div>
+            
+            <div class="challenges-list">
+              <div class="challenge-item">
+                <div class="chall-info">
+                  <h4>Delhi NCR Resident Welfare Solar Shave</h4>
+                  <p>Goal: Coordinate evening AC cooling peaks across residential societies.</p>
+                  <div class="progress-bar-container">
+                    <div class="progress-fill" style="width: 78%;"></div>
+                  </div>
+                  <span class="progress-text">78% Achieved - 3 Days Left</span>
+                </div>
+                <button class="join-btn joined" disabled>Active Participant</button>
+              </div>
+              
+              <div class="challenge-item">
+                <div class="chall-info">
+                  <h4>Metro Commuter League (Mumbai/Delhi/Namma)</h4>
+                  <p>Goal: Take the metro or local trains for 5 commutes this week.</p>
+                  <div class="progress-bar-container">
+                    <div class="progress-fill" style="width: 40%;"></div>
+                  </div>
+                  <span class="progress-text">2/5 Commutes Completed</span>
+                </div>
+                <button class="join-btn" id="btn-join-commute">Progress Logged</button>
+              </div>
+            </div>
+            
+            <div class="leaderboard-section">
+              <span class="section-subtitle">Local Block Leaderboard</span>
+              <div class="leaderboard-list">
+                <div class="leader-row user-row">
+                  <span class="rank">#3</span>
+                  <span class="name">You (Eco Twin Active)</span>
+                  <span class="points">3,450 XP</span>
+                </div>
+                <div class="leader-row">
+                  <span class="rank">#1</span>
+                  <span class="name">Aarav K. (Solar Charged)</span>
+                  <span class="points">4,120 XP</span>
+                </div>
+                <div class="leader-row">
+                  <span class="rank">#2</span>
+                  <span class="name">Priya S. (Metro Commuter)</span>
+                  <span class="points">3,890 XP</span>
+                </div>
+                <div class="leader-row">
+                  <span class="rank">#4</span>
+                  <span class="name">Rajesh M. (BLDC Fan Adapter)</span>
+                  <span class="points">3,120 XP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Column 2: Badges & Achievements -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <h3>Impact Achievements</h3>
+              <p class="subtitle">Badges earned by demonstrating behavioral adjustments.</p>
+            </div>
+            
+            <div class="badges-grid">
+              <div class="badge-item active">
+                <div class="badge-icon icon-emerald-glow">
+                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                </div>
+                <h4>Green Yogi</h4>
+                <p>Grid coordination streak > 7 days</p>
+              </div>
+              
+              <div class="badge-item active">
+                <div class="badge-icon icon-transit-pro">
+                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-1.1 0-2 .9-2 2v7h2"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>
+                </div>
+                <h4>Metro Maharaja</h4>
+                <p>Avoided 50kg vehicle carbon</p>
+              </div>
+              
+              <div class="badge-item locked" id="badge-plant-guru">
+                <div class="badge-icon">
+                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2a10 10 0 0 1 10 10v10H12A10 10 0 0 1 2 12V2h10z"></path></svg>
+                </div>
+                <h4>Sattvic Guru</h4>
+                <p>15 vegetarian/millet meals in a row (Locked)</p>
+              </div>
+              
+              <div class="badge-item locked">
+                <div class="badge-icon">
+                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12M6 9h12M6 4a5 5 0 0 1 0 10H6m5 0l6 6"></path></svg>
+                </div>
+                <h4>Net Zero Guru</h4>
+                <p>Achieve single-digit daily score (Locked)</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+    </main>
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>

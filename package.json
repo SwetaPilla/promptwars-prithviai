@@ -1,0 +1,13 @@
+{
+  "name": "eco-twin-ai",
+  "version": "1.0.0",
+  "description": "ECO TWIN AI - Behavioral Change Ecosystem",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
