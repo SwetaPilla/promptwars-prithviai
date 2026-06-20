@@ -170,10 +170,14 @@ function initTabs() {
   
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
       panels.forEach(p => p.classList.remove('active'));
       
       tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
       const targetPanel = document.getElementById(`panel-${tab.dataset.tab}`);
       if (targetPanel) {
         targetPanel.classList.add('active');
@@ -214,6 +218,7 @@ function initTwinControls() {
         const val = parseFloat(e.target.value);
         state.lifestyle[s.stateKey] = val;
         output.textContent = val + s.suffix;
+        input.setAttribute('aria-valuenow', val);
         
         updateAllCalculations();
       });
@@ -365,6 +370,7 @@ function initSimulator() {
         const val = parseInt(e.target.value);
         state.projection[s.stateKey] = val;
         output.textContent = val + '%';
+        input.setAttribute('aria-valuenow', val);
         
         scenarios.forEach(s => document.getElementById(`btn-${s}`).classList.remove('active'));
         state.projection.scenario = 'custom';
@@ -391,13 +397,19 @@ function applyScenarioPreset(scenario) {
     p.plantDietShare = 90;
   }
   
-  document.getElementById('slide-solar-adoption').value = p.solarShare;
+  const solarInput = document.getElementById('slide-solar-adoption');
+  solarInput.value = p.solarShare;
+  solarInput.setAttribute('aria-valuenow', p.solarShare);
   document.getElementById('val-solar-adoption').textContent = p.solarShare + '%';
   
-  document.getElementById('slide-transit-share').value = p.transitShare;
+  const transitInput = document.getElementById('slide-transit-share');
+  transitInput.value = p.transitShare;
+  transitInput.setAttribute('aria-valuenow', p.transitShare);
   document.getElementById('val-transit-share').textContent = p.transitShare + '%';
   
-  document.getElementById('slide-plant-diet').value = p.plantDietShare;
+  const plantInput = document.getElementById('slide-plant-diet');
+  plantInput.value = p.plantDietShare;
+  plantInput.setAttribute('aria-valuenow', p.plantDietShare);
   document.getElementById('val-plant-diet').textContent = p.plantDietShare + '%';
 }
 

@@ -1,13 +1,16 @@
 {
-  "name": "eco-twin-ai",
+  "name": "prithvi-mitra-ai",
   "version": "1.0.0",
-  "description": "ECO TWIN AI - Behavioral Change Ecosystem",
+  "description": "PrithviMitra AI (पृथ्वीमित्र) - India's Personal Cognitive-Behavioral Climate Companion",
   "main": "index.html",
   "scripts": {
-    "start": "npx http-server -p 8080"
+    "start": "npx http-server -p 8080",
+    "test": "vitest run"
   },
   "dependencies": {},
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "jsdom": "^24.0.0",
+    "vitest": "^1.4.0"
   }
 }

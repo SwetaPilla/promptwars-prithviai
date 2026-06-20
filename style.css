@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ECO TWIN AI DESIGN SYSTEM (style.css)
+   PRITHVIMITRA AI DESIGN SYSTEM (style.css)
    ========================================================================== */
 
 /* Variables & Custom Properties */
@@ -66,6 +66,16 @@ body {
 
 button, input {
   font-family: inherit;
+}
+
+/* Focus styles for keyboard accessibility */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible,
+[role="tab"]:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
 }
 
 /* App Container Layout */
